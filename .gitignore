@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# MacOS
+.DS_Store
+
+# Logs
+*.log
+*.pid
+
+# Data
+*.csv
+kagglehub/
+
+# IDEs
+.vscode/
+.idea/
+
+# Local Gemini files
+.gemini/
