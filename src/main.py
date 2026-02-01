@@ -16,7 +16,8 @@ app = FastAPI(title="Conductor Job Embedding Service")
 # Security Configuration
 API_KEY_NAME = "X-API-Key"
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=True)
-CONDUCTOR_API_KEY = os.getenv("CONDUCTOR_API_KEY")
+# Check both possible env var names
+CONDUCTOR_API_KEY = os.getenv("CONDUCTOR_API_KEY") or os.getenv("X-API-Key")
 
 async def get_api_key(api_key_header: str = Security(api_key_header)):
     if not CONDUCTOR_API_KEY:
