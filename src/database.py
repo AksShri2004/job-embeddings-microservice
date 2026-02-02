@@ -8,7 +8,7 @@ load_dotenv()
 
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 DB_NAME = os.getenv("DB_NAME", "conductor_db")
-COLLECTION_NAME = "jobs"
+COLLECTION_NAME = os.getenv("DB_COLLECTION", "jobs")
 
 client = None
 db = None

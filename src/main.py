@@ -4,9 +4,11 @@ from src.normalizer import normalize_job
 from src.embedder import generate_embeddings, get_metadata
 from src.schemas import JobOutput
 from src.database import connect_to_mongo, close_mongo_connection, save_job
+from src.watcher import watch_and_embed
 import uuid
 import os
 import uvicorn
+import asyncio
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -38,6 +40,8 @@ async def get_api_key(api_key_header: str = Security(api_key_header)):
 @app.on_event("startup")
 async def startup_db_client():
     await connect_to_mongo()
+    # Start the background watcher
+    asyncio.create_task(watch_and_embed())
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
